@@ -18,8 +18,8 @@ public class Main {
         // Crear fábricas de productos
         ProductoElectricoFactory factoryElectrico = new ProductoElectricoFactory();
         ProductoAlimentoFactory factoryAlimento = new ProductoAlimentoFactory();
-
-        // Crear productos usando Factory Method
+        
+        // Crear productos usando Factory 
         Producto producto1 = factoryElectrico.crearProducto(109, "Laptop Dell", 7);
         Producto producto2 = factoryAlimento.crearProducto(102, "Smartphone Samsung", 0);
 
