@@ -6,8 +6,6 @@ import java.util.List;
 import co.edu.poli.TiendaJJM.modelo.Cliente;
 import co.edu.poli.TiendaJJM.modelo.Pedido;
 import co.edu.poli.TiendaJJM.modelo.Producto;
-import co.edu.poli.TiendaJJM.modelo.ProductoAlimento;
-import co.edu.poli.TiendaJJM.modelo.ProductoElectrico;
 import co.edu.poli.TiendaJJM.modelo.ProductoAlimentoFactory;
 import co.edu.poli.TiendaJJM.modelo.ProductoElectricoFactory;
 import co.edu.poli.TiendaJJM.services.ClienteImplementacionDAO;
@@ -44,25 +42,35 @@ public class Main {
         System.out.println("Productos en el pedido:");
 
         // Mostrar todos los productos del pedido
-       for (int i = 0; i < pedido.getProductos().size(); i++) {
+        for (int i = 0; i < pedido.getProductos().size(); i++) {
             System.out.println("Producto " + (i + 1) + ": " + pedido.getProductos().get(i).getDescripcion());
         }
-
 
         try {
             // Uso de polimorfismo para crear objetos DAO
             DAOCRUD<Cliente> clienteDAO = new ClienteImplementacionDAO();
             DAOCRUD<Producto> productoDAO = new ProductoImplementacionDAO();
 
-            // Agregar y obtener cliente usando polimorfismo
+            // Agregar cliente y obtenerlo usando el ID correcto
             clienteDAO.agregar(cliente);
-            Cliente clientePolimorfico = clienteDAO.obtener("98765uc");
-            System.out.println("Cliente obtenido usando polimorfismo: " + clientePolimorfico.getNombre());
+            Cliente clientePolimorfico = clienteDAO.obtener(cliente.getIdCliente());  // <-- ID correcto
 
-            // Agregar y obtener producto usando polimorfismo
+            if (clientePolimorfico != null) {
+                System.out.println("Cliente obtenido usando polimorfismo: " + clientePolimorfico.getNombre());
+            } else {
+                System.out.println("Error: No se encontró el cliente en la base de datos.");
+            }
+
+            // Agregar producto y obtenerlo usando polimorfismo
             productoDAO.agregar(producto1);
             Producto productoPolimorfico = productoDAO.obtener("109");
-            System.out.println("Producto obtenido usando polimorfismo: " + productoPolimorfico.getDescripcion());
+
+            if (productoPolimorfico != null) {
+                System.out.println("Producto obtenido usando polimorfismo: " + productoPolimorfico.getDescripcion());
+            } else {
+                System.out.println("Error: No se encontró el producto en la base de datos.");
+            }
+            
         } catch (DatabaseConnectionException e) {
             e.printStackTrace();
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());

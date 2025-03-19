@@ -15,18 +15,22 @@ import javafx.scene.control.TextField;
 public class ControladorFormulario {
 
     @FXML
-    private Button Btt1, btnEliminar, btnActualizar, btnMostrar, btnAgregarProducto, btnEliminarProducto;
+    private Button Btt1, btnEliminar, btnActualizar, btnMostrar, btnAgregarProducto, btnEliminarProducto, btnClonar;
 
     @FXML
     private TextField txt1, txt2, txtEliminar, txtIdActualizar, txtNombreActualizar, txtIdProducto, txtNombreProducto;
 
     private DAOCRUD<Cliente> clienteDAO;
     private ProductoImplementacionDAO productoDAO;
+    
+    private Producto productoBase;
 
     public ControladorFormulario() {
         try {
             clienteDAO = new ClienteImplementacionDAO();
             productoDAO = new ProductoImplementacionDAO();
+            // Producto base para clonar
+            productoBase = new Producto(1, "Laptop Dell", 109.0, "Electrónica");
         } catch (DatabaseConnectionException e) {
             System.out.println("❌ Error de conexión a la base de datos: " + e.getMessage());
         }
@@ -80,12 +84,19 @@ public class ControladorFormulario {
         }
     }
 
+    @FXML
+    void clonarProducto(ActionEvent event) {
+        Producto productoClonado = productoBase.clone();
+        mostrarAlerta("✅ Producto clonado: \n" + productoClonado, Alert.AlertType.INFORMATION);
+        System.out.println("Producto clonado: " + productoClonado);
+    }
+
     private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setContentText(mensaje);
         alerta.show();
     }
-    
+
     @FXML
     void mostrarCliente(ActionEvent event) {
         String idCliente = txtIdActualizar.getText();
@@ -103,6 +114,4 @@ public class ControladorFormulario {
             mostrarAlerta("❌ Cliente no encontrado.", Alert.AlertType.ERROR);
         }
     }
-
-
 }

@@ -1,46 +1,40 @@
 package co.edu.poli.TiendaJJM.modelo;
 
-public class Producto implements CloneableProduct {
-    private int id;  // Se agrega el ID
-    private String nombre;
+public class Producto implements Prototype {
+    private int id;
+    private String descripcion;
     private double precio;
-    
+    private String tipo;
 
-    // Constructor
-    public Producto(int id, String nombre, double precio, String categoria) {
+    // Constructor original
+    public Producto(int id, String descripcion) {
         this.id = id;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    // Nuevo constructor con precio y tipo
+    public Producto(int id, String descripcion, double precio, String tipo) {
+        this.id = id;
+        this.descripcion = descripcion;
         this.precio = precio;
-       
+        this.tipo = tipo;
     }
 
-    // Implementación del método clone para clonar productos
-    @Override
-    public Producto clone() {
-        return new Producto(this.id, this.nombre, this.precio, null );
-    }
-
-    // Nuevo método para obtener la descripción del producto
-    public String getDescripcion() {
-        return "Producto: " + nombre + ", Precio: $" + precio ;
-    }
-
-    // Getter para ID (corrige el error)
+    // Getters y Setters
     public int getId() {
         return id;
     }
 
-    // Getters y Setters
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public double getPrecio() {
@@ -51,21 +45,24 @@ public class Producto implements CloneableProduct {
         this.precio = precio;
     }
 
-
-
-    // Método toString para mostrar información del producto
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", precio=" + precio
-                ;}
-
-	@Override
-	public CloneableProduct clonar() {
-		// TODO Auto-generated method stub
-		return null;
-	};
+    public String getTipo() {
+        return tipo;
     }
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    // Clonación del objeto incluyendo los nuevos atributos
+    @Override
+    public Producto clone() {
+        return new Producto(this.id, this.descripcion, this.precio, this.tipo);
+    }
+
+    // Representación en cadena mejorada
+    @Override
+    public String toString() {
+        return "Producto [ID = " + id + ", Descripción = " + descripcion + 
+               ", Precio = $" + precio + ", Tipo = " + tipo + "]";
+    }
+}
