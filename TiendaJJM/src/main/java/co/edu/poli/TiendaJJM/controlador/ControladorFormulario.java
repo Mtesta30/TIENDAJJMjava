@@ -1,7 +1,11 @@
 package co.edu.poli.TiendaJJM.controlador;
 
+import co.edu.poli.TiendaJJM.modelo.Certificacion;
 import co.edu.poli.TiendaJJM.modelo.Cliente;
+import co.edu.poli.TiendaJJM.modelo.Evaluacion;
+import co.edu.poli.TiendaJJM.modelo.PoliticaEntrega;
 import co.edu.poli.TiendaJJM.modelo.Producto;
+import co.edu.poli.TiendaJJM.modelo.Proveedor;
 import co.edu.poli.TiendaJJM.services.ClienteImplementacionDAO;
 import co.edu.poli.TiendaJJM.services.ProductoImplementacionDAO;
 import co.edu.poli.TiendaJJM.services.DAOCRUD;
@@ -24,6 +28,26 @@ public class ControladorFormulario {
     private ProductoImplementacionDAO productoDAO;
     
     private Producto productoBase;
+
+     @FXML
+    private Button btnBuilder;
+
+    @FXML
+    private void crearProveedor() {
+        // Crear un proveedor usando el patrón Builder
+        Proveedor proveedor = new Proveedor.Builder()
+                .setEvaluacion(new Evaluacion("Evaluación: Aprobada con 90%"))
+                .setCertificacion(new Certificacion("Certificación: ISO 14001"))
+                .setPoliticaEntrega(new PoliticaEntrega("Entrega en 48 horas"))
+                .build();
+
+        // Mostrar el proveedor creado en una alerta
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Proveedor Creado");
+        alert.setHeaderText("Detalles del Proveedor");
+        alert.setContentText(proveedor.toString());
+        alert.showAndWait();
+    }
 
     public ControladorFormulario() {
         try {
