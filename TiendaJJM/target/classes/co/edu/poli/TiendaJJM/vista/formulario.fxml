@@ -33,12 +33,11 @@
         <!-- Botón Mostrar Cliente -->
         <Button fx:id="btnMostrarCliente" layoutX="251.0" layoutY="237.0" mnemonicParsing="false" onAction="#mostrarCliente" text="Mostrar Cliente" />
 
-        <!-- Sección Producto 
-    <TextField fx:id="txtIdProducto" alignment="CENTER" layoutX="423.0" layoutY="315.0" promptText="ID Producto" />
-    <TextField fx:id="txtNombreProducto" alignment="CENTER" layoutX="423.0" layoutY="357.0" promptText="Nombre Producto" />
-    <Button fx:id="btnAgregarProducto" layoutX="442.0" layoutY="392.0" mnemonicParsing="false" onAction="#agregarProducto" text="Agregar Producto" />
-    <Button fx:id="btnEliminarProducto" layoutX="442.0" layoutY="427.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar Producto" />
--->
+        <!-- Sección Producto -->
+        <TextField fx:id="txtIdProducto" alignment="CENTER" layoutX="423.0" layoutY="315.0" promptText="ID Producto" />
+        <TextField fx:id="txtNombreProducto" alignment="CENTER" layoutX="423.0" layoutY="357.0" promptText="Nombre Producto" />
+        <Button fx:id="btnAgregarProducto" layoutX="442.0" layoutY="392.0" mnemonicParsing="false" onAction="#agregarProducto" text="Agregar Producto" />
+        <Button fx:id="btnEliminarProducto" layoutX="442.0" layoutY="427.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar Producto" />
 
         <!-- Botón Clonar Producto -->
         <Button fx:id="btnClonar" layoutX="446.0" layoutY="460.0" mnemonicParsing="false" onAction="#clonarProducto" text="Clonar Producto" />
