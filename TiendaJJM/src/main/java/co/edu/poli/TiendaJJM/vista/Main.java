@@ -12,6 +12,9 @@ import co.edu.poli.TiendaJJM.modelo.Evaluacion;
 import co.edu.poli.TiendaJJM.modelo.Certificacion;
 import co.edu.poli.TiendaJJM.modelo.PoliticaEntrega;
 import co.edu.poli.TiendaJJM.modelo.Proveedor;
+import co.edu.poli.TiendaJJM.modelo.Component;
+import co.edu.poli.TiendaJJM.modelo.Department;
+import co.edu.poli.TiendaJJM.modelo.Employee;
 import co.edu.poli.TiendaJJM.services.ClienteImplementacionDAO;
 import co.edu.poli.TiendaJJM.services.DAOCRUD;
 import co.edu.poli.TiendaJJM.services.DatabaseConnectionException;
@@ -93,6 +96,40 @@ public class Main {
         // Mostrar detalles del proveedor creado
         System.out.println("Proveedor creado:");
         System.out.println(proveedor);
+
+        // --- INTEGRACIÓN DEL PATRÓN COMPOSITE ---
+        System.out.println("\n=== Creando Jerarquía de Empleados y Departamentos ===");
+
+        // Crear empleados
+        Employee emp1 = new Employee("Juan", "Developer");
+        Employee emp2 = new Employee("Maria", "Designer");
+        Employee emp3 = new Employee("Carlos", "Manager");
+
+        // Crear departamentos
+        Department dept1 = new Department("IT");
+        Department dept2 = new Department("Design");
+
+        // Agregar empleados a departamentos
+        dept1.addComponent(emp1);
+        dept1.addComponent(emp3);
+        dept2.addComponent(emp2);
+
+        // Crear un departamento general
+        Department company = new Department("Company");
+        company.addComponent(dept1);
+        company.addComponent(dept2);
+
+        // Mostrar jerarquía
+        System.out.println("\nEstructura de la Empresa:");
+        showDetails(company);
+    }
+
+    private static void showDetails(Component component) {
+        component.showDetails();
+        if (component instanceof Department) {
+            for (Component child : ((Department) component).getComponents()) {
+                showDetails(child);
+            }
+        }
     }
 }
-

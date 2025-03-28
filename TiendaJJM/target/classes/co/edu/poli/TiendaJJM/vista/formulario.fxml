@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -32,8 +33,19 @@
 
         <!-- Botón Mostrar Cliente -->
         <Button fx:id="btnMostrarCliente" layoutX="251.0" layoutY="250.0" mnemonicParsing="false" onAction="#mostrarCliente" text="Mostrar Cliente" />
+        <!-- Botón Clonar Producto -->
+        <Button fx:id="btnClonar" layoutX="250.0" layoutY="300.0" mnemonicParsing="false" onAction="#clonarProducto" text="Clonar Producto" />
 
         <!-- Botón BUILDER -->
         <Button fx:id="btnBuilder" layoutX="57.0" layoutY="334.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="121.0" text="BUILDER" textAlignment="CENTER" onAction="#crearProveedor"/>
+
+        <!-- Botón COMPONENT -->
+        <Button fx:id="btnComponent" layoutX="57.0" layoutY="380.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="121.0" text="COMPONENT" textAlignment="CENTER" onAction="#mostrarComponent"/>
+        
+        <!-- Sección Métodos de Pago -->
+        <Button fx:id="btnNequi" layoutX="150.0" layoutY="440.0" onAction="#pagarConNequi" text="Pagar con Nequi" />
+        <Button fx:id="btnPayPal" layoutX="350.0" layoutY="440.0" onAction="#pagarConPayPal" text="Pagar con PayPal" />
+
+  
     </children>
 </AnchorPane>
