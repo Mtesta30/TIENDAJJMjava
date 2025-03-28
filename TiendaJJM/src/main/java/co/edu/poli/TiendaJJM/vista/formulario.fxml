@@ -31,7 +31,7 @@
         <Button fx:id="btnActualizar" layoutX="500.0" layoutY="200.0" onAction="#actualizarCliente" text="Actualizar Cliente" />
 
         <!-- Botón Mostrar Cliente -->
-        <Button fx:id="btnMostrarCliente" layoutX="250.0" layoutY="250.0" mnemonicParsing="false" onAction="#mostrarCliente" text="Mostrar Cliente" />
+        <Button fx:id="btnMostrar" layoutX="250.0" layoutY="250.0" mnemonicParsing="false" onAction="#mostrarCliente" text="Mostrar Cliente" />
 
         <!-- Sección Producto -->
         <TextField fx:id="txtIdProducto" alignment="CENTER" layoutX="50.0" layoutY="300.0" promptText="ID Producto" />
@@ -43,8 +43,11 @@
         <Button fx:id="btnClonar" layoutX="500.0" layoutY="400.0" mnemonicParsing="false" onAction="#clonarProducto" text="Clonar Producto" />
 
         <!-- Sección Métodos de Pago -->
-        <Button fx:id="btnPagarNequi" layoutX="100.0" layoutY="480.0" onAction="#pagarConNequi" text="Pagar con Nequi" />
-        <Button fx:id="btnPagarPayPal" layoutX="350.0" layoutY="480.0" onAction="#pagarConPayPal" text="Pagar con PayPal" />
+        <Button fx:id="btnNequi" layoutX="100.0" layoutY="480.0" onAction="#pagarConNequi" text="Pagar con Nequi" />
+        <Button fx:id="btnPayPal" layoutX="350.0" layoutY="480.0" onAction="#pagarConPayPal" text="Pagar con PayPal" />
+
+        <!-- Botón Builder -->
+        <Button fx:id="btnBuilder" layoutX="250.0" layoutY="530.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="150.0" text="Crear Proveedor" textAlignment="CENTER" onAction="#crearProveedor"/>
         
     </children>
 </AnchorPane>

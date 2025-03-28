@@ -3,15 +3,8 @@ package co.edu.poli.TiendaJJM.vista;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.poli.TiendaJJM.modelo.Cliente;
-import co.edu.poli.TiendaJJM.modelo.Pedido;
-import co.edu.poli.TiendaJJM.modelo.Producto;
-import co.edu.poli.TiendaJJM.modelo.ProductoAlimentoFactory;
-import co.edu.poli.TiendaJJM.modelo.ProductoElectricoFactory;
-import co.edu.poli.TiendaJJM.services.ClienteImplementacionDAO;
-import co.edu.poli.TiendaJJM.services.DAOCRUD;
-import co.edu.poli.TiendaJJM.services.DatabaseConnectionException;
-import co.edu.poli.TiendaJJM.services.ProductoImplementacionDAO;
+import co.edu.poli.TiendaJJM.modelo.*;
+import co.edu.poli.TiendaJJM.services.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -53,7 +46,7 @@ public class Main {
 
             // Agregar cliente y obtenerlo usando el ID correcto
             clienteDAO.agregar(cliente);
-            Cliente clientePolimorfico = clienteDAO.obtener(cliente.getIdCliente());  // <-- ID correcto
+            Cliente clientePolimorfico = clienteDAO.obtener(cliente.getIdCliente());
 
             if (clientePolimorfico != null) {
                 System.out.println("Cliente obtenido usando polimorfismo: " + clientePolimorfico.getNombre());
@@ -70,10 +63,23 @@ public class Main {
             } else {
                 System.out.println("Error: No se encontró el producto en la base de datos.");
             }
-            
         } catch (DatabaseConnectionException e) {
             e.printStackTrace();
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());
         }
+
+        // --- INTEGRACIÓN DEL PATRÓN BUILDER ---
+        System.out.println("\n=== Creando Proveedor con Builder ===");
+
+        // Crear un proveedor usando el patrón Builder
+        Proveedor proveedor = new Proveedor.Builder()
+                .setEvaluacion(new Evaluacion("Evaluación: Aprobada con 90%"))
+                .setCertificacion(new Certificacion("Certificación: ISO 14001"))
+                .setPoliticaEntrega(new PoliticaEntrega("Entrega en 48 horas"))
+                .build();
+
+        // Mostrar detalles del proveedor creado
+        System.out.println("Proveedor creado:");
+        System.out.println(proveedor);
     }
 }

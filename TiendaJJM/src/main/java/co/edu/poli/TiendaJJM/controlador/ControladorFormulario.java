@@ -1,12 +1,6 @@
 package co.edu.poli.TiendaJJM.controlador;
 
-import co.edu.poli.TiendaJJM.modelo.AdaptadorNequi;
-import co.edu.poli.TiendaJJM.modelo.AdaptadorPayPal;
-import co.edu.poli.TiendaJJM.modelo.Cliente;
-import co.edu.poli.TiendaJJM.modelo.Nequi;
-import co.edu.poli.TiendaJJM.modelo.PayPal;
-import co.edu.poli.TiendaJJM.modelo.Producto;
-import co.edu.poli.TiendaJJM.modelo.SistemaPago;
+import co.edu.poli.TiendaJJM.modelo.*;
 import co.edu.poli.TiendaJJM.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,14 +11,13 @@ import javafx.scene.control.TextField;
 public class ControladorFormulario {
 
     @FXML
-    private Button Btt1, btnEliminar, btnActualizar, btnMostrar, btnAgregarProducto, btnEliminarProducto, btnClonar, btnNequi, btnPayPal;
+    private Button Btt1, btnEliminar, btnActualizar, btnMostrar, btnAgregarProducto, btnEliminarProducto, btnClonar, btnNequi, btnPayPal, btnBuilder;
 
     @FXML
     private TextField txt1, txt2, txtEliminar, txtIdActualizar, txtNombreActualizar, txtIdProducto, txtNombreProducto;
 
     private DAOCRUD<Cliente> clienteDAO;
     private ProductoImplementacionDAO productoDAO;
-
     private Producto productoBase;
 
     public ControladorFormulario() {
@@ -35,6 +28,17 @@ public class ControladorFormulario {
         } catch (DatabaseConnectionException e) {
             System.out.println("❌ Error de conexión a la base de datos: " + e.getMessage());
         }
+    }
+
+    @FXML
+    private void crearProveedor() {
+        Proveedor proveedor = new Proveedor.Builder()
+                .setEvaluacion(new Evaluacion("Evaluación: Aprobada con 90%"))
+                .setCertificacion(new Certificacion("Certificación: ISO 14001"))
+                .setPoliticaEntrega(new PoliticaEntrega("Entrega en 48 horas"))
+                .build();
+
+        mostrarAlerta("✅ Proveedor Creado:\n" + proveedor.toString(), Alert.AlertType.INFORMATION);
     }
 
     @FXML
@@ -95,14 +99,12 @@ public class ControladorFormulario {
     @FXML
     void mostrarCliente(ActionEvent event) {
         String idCliente = txtIdActualizar.getText();
-        
         if (idCliente.isEmpty()) {
             mostrarAlerta("❌ Por favor, ingresa un ID.", Alert.AlertType.WARNING);
             return;
         }
 
         Cliente cliente = clienteDAO.obtener(idCliente);
-
         if (cliente != null) {
             mostrarAlerta("✅ Cliente encontrado: \nID: " + cliente.getIdCliente() + "\nNombre: " + cliente.getNombre(), Alert.AlertType.INFORMATION);
         } else {
@@ -110,11 +112,10 @@ public class ControladorFormulario {
         }
     }
 
-    // MÉTODOS DE PAGO USANDO ADAPTER
     @FXML
     void pagarConNequi(ActionEvent event) {
         SistemaPago nequi = new AdaptadorNequi(new Nequi());
-        boolean resultado = nequi.realizarPago(50000); // Simulación de pago
+        boolean resultado = nequi.realizarPago(50000);
 
         if (resultado) {
             mostrarAlerta("✅ Pago realizado con Nequi exitosamente.", Alert.AlertType.INFORMATION);
@@ -126,7 +127,7 @@ public class ControladorFormulario {
     @FXML
     void pagarConPayPal(ActionEvent event) {
         SistemaPago paypal = new AdaptadorPayPal(new PayPal());
-        boolean resultado = paypal.realizarPago(50000); // Simulación de pago
+        boolean resultado = paypal.realizarPago(50000);
 
         if (resultado) {
             mostrarAlerta("✅ Pago realizado con PayPal exitosamente.", Alert.AlertType.INFORMATION);
@@ -135,7 +136,6 @@ public class ControladorFormulario {
         }
     }
 
-    // MÉTODO PARA MOSTRAR ALERTAS
     private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setContentText(mensaje);
