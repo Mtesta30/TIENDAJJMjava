@@ -8,6 +8,13 @@ import co.edu.poli.TiendaJJM.modelo.Pedido;
 import co.edu.poli.TiendaJJM.modelo.Producto;
 import co.edu.poli.TiendaJJM.modelo.ProductoAlimentoFactory;
 import co.edu.poli.TiendaJJM.modelo.ProductoElectricoFactory;
+import co.edu.poli.TiendaJJM.modelo.Evaluacion;
+import co.edu.poli.TiendaJJM.modelo.Certificacion;
+import co.edu.poli.TiendaJJM.modelo.PoliticaEntrega;
+import co.edu.poli.TiendaJJM.modelo.Proveedor;
+import co.edu.poli.TiendaJJM.modelo.Component;
+import co.edu.poli.TiendaJJM.modelo.Department;
+import co.edu.poli.TiendaJJM.modelo.Employee;
 import co.edu.poli.TiendaJJM.services.ClienteImplementacionDAO;
 import co.edu.poli.TiendaJJM.services.DAOCRUD;
 import co.edu.poli.TiendaJJM.services.DatabaseConnectionException;
@@ -70,10 +77,59 @@ public class Main {
             } else {
                 System.out.println("Error: No se encontró el producto en la base de datos.");
             }
-            
+
         } catch (DatabaseConnectionException e) {
             e.printStackTrace();
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());
+        }
+
+        // --- INTEGRACIÓN DEL PATRÓN BUILDER ---
+        System.out.println("\n=== Creando Proveedor con Builder ===");
+
+        // Crear un proveedor usando el patrón Builder
+        Proveedor proveedor = new Proveedor.Builder()
+                .setEvaluacion(new Evaluacion("Evaluación: Aprobada con 90%"))
+                .setCertificacion(new Certificacion("Certificación: ISO 14001"))
+                .setPoliticaEntrega(new PoliticaEntrega("Entrega en 48 horas"))
+                .build();
+
+        // Mostrar detalles del proveedor creado
+        System.out.println("Proveedor creado:");
+        System.out.println(proveedor);
+
+        // --- INTEGRACIÓN DEL PATRÓN COMPOSITE ---
+        System.out.println("\n=== Creando Jerarquía de Empleados y Departamentos ===");
+
+        // Crear empleados
+        Employee emp1 = new Employee("Juan", "Developer");
+        Employee emp2 = new Employee("Maria", "Designer");
+        Employee emp3 = new Employee("Carlos", "Manager");
+
+        // Crear departamentos
+        Department dept1 = new Department("IT");
+        Department dept2 = new Department("Design");
+
+        // Agregar empleados a departamentos
+        dept1.addComponent(emp1);
+        dept1.addComponent(emp3);
+        dept2.addComponent(emp2);
+
+        // Crear un departamento general
+        Department company = new Department("Company");
+        company.addComponent(dept1);
+        company.addComponent(dept2);
+
+        // Mostrar jerarquía
+        System.out.println("\nEstructura de la Empresa:");
+        showDetails(company);
+    }
+
+    private static void showDetails(Component component) {
+        component.showDetails();
+        if (component instanceof Department) {
+            for (Component child : ((Department) component).getComponents()) {
+                showDetails(child);
+            }
         }
     }
 }
