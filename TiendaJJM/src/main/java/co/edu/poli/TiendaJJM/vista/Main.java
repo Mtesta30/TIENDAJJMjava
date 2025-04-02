@@ -1,24 +1,9 @@
 package co.edu.poli.TiendaJJM.vista;
 
+import co.edu.poli.TiendaJJM.modelo.*;
+import co.edu.poli.TiendaJJM.services.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import co.edu.poli.TiendaJJM.modelo.Cliente;
-import co.edu.poli.TiendaJJM.modelo.Pedido;
-import co.edu.poli.TiendaJJM.modelo.Producto;
-import co.edu.poli.TiendaJJM.modelo.ProductoAlimentoFactory;
-import co.edu.poli.TiendaJJM.modelo.ProductoElectricoFactory;
-import co.edu.poli.TiendaJJM.modelo.Evaluacion;
-import co.edu.poli.TiendaJJM.modelo.Certificacion;
-import co.edu.poli.TiendaJJM.modelo.PoliticaEntrega;
-import co.edu.poli.TiendaJJM.modelo.Proveedor;
-import co.edu.poli.TiendaJJM.modelo.Component;
-import co.edu.poli.TiendaJJM.modelo.Department;
-import co.edu.poli.TiendaJJM.modelo.Employee;
-import co.edu.poli.TiendaJJM.services.ClienteImplementacionDAO;
-import co.edu.poli.TiendaJJM.services.DAOCRUD;
-import co.edu.poli.TiendaJJM.services.DatabaseConnectionException;
-import co.edu.poli.TiendaJJM.services.ProductoImplementacionDAO;
 
 public class Main {
     public static void main(String[] args) {
@@ -60,7 +45,7 @@ public class Main {
 
             // Agregar cliente y obtenerlo usando el ID correcto
             clienteDAO.agregar(cliente);
-            Cliente clientePolimorfico = clienteDAO.obtener(cliente.getIdCliente());  // <-- ID correcto
+            Cliente clientePolimorfico = clienteDAO.obtener(cliente.getIdCliente());
 
             if (clientePolimorfico != null) {
                 System.out.println("Cliente obtenido usando polimorfismo: " + clientePolimorfico.getNombre());
@@ -77,7 +62,6 @@ public class Main {
             } else {
                 System.out.println("Error: No se encontró el producto en la base de datos.");
             }
-
         } catch (DatabaseConnectionException e) {
             e.printStackTrace();
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());

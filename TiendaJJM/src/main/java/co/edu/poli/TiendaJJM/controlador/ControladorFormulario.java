@@ -11,45 +11,24 @@ import javafx.scene.control.TextField;
 public class ControladorFormulario {
 
     @FXML
-    private Button Btt1, btnEliminar, btnActualizar, btnMostrar, btnAgregarProducto, btnEliminarProducto, btnComponento, btnClonar, btnNequi, btnPayPal;
+    private Button Btt1, btnEliminar, btnActualizar, btnMostrar, btnAgregarProducto, btnEliminarProducto, btnClonar, btnNequi, btnPayPal, btnBuilder;
 
     @FXML
     private TextField txt1, txt2, txtEliminar, txtIdActualizar, txtNombreActualizar, txtIdProducto, txtNombreProducto;
 
     private DAOCRUD<Cliente> clienteDAO;
     private ProductoImplementacionDAO productoDAO;
-
     private Producto productoBase;
 
     @FXML
-    private Button btnBuilder;
-
-    @FXML
     private void crearProveedor() {
-        // Crear un proveedor usando el patrón Builder
         Proveedor proveedor = new Proveedor.Builder()
                 .setEvaluacion(new Evaluacion("Evaluación: Aprobada con 90%"))
                 .setCertificacion(new Certificacion("Certificación: ISO 14001"))
                 .setPoliticaEntrega(new PoliticaEntrega("Entrega en 48 horas"))
                 .build();
 
-        // Mostrar el proveedor creado en una alerta
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Proveedor Creado");
-        alert.setHeaderText("Detalles del Proveedor");
-        alert.setContentText(proveedor.toString());
-        alert.showAndWait();
-    }
-
-    public ControladorFormulario() {
-        try {
-            clienteDAO = new ClienteImplementacionDAO();
-            productoDAO = new ProductoImplementacionDAO();
-            // Producto base para clonar
-            productoBase = new Producto(1, "Laptop Dell", 109.0, "Electrónica");
-        } catch (DatabaseConnectionException e) {
-            System.out.println("❌ Error de conexión a la base de datos: " + e.getMessage());
-        }
+        mostrarAlerta("✅ Proveedor Creado:\n" + proveedor.toString(), Alert.AlertType.INFORMATION);
     }
 
     @FXML
@@ -102,44 +81,33 @@ public class ControladorFormulario {
 
     @FXML
     void clonarProducto(ActionEvent event) {
-        // Verificar si productoBase es null y asignar un producto predeterminado si es necesario
         if (productoBase == null) {
             productoBase = new Producto(0, "Producto Genérico", 0.0, "Categoría Genérica");
         }
-
-        // Clonar el producto base
         Producto productoClonado = productoBase.clone();
-
-        // Mostrar el producto clonado en una alerta
         mostrarAlerta("✅ Producto clonado: \n" + productoClonado, Alert.AlertType.INFORMATION);
     }
 
     @FXML
     void mostrarComponent(ActionEvent event) {
-        // Crear empleados
         Employee emp1 = new Employee("Juan", "Developer");
         Employee emp2 = new Employee("Maria", "Designer");
         Employee emp3 = new Employee("Carlos", "Manager");
 
-        // Crear departamentos
         Department dept1 = new Department("IT");
         Department dept2 = new Department("Design");
 
-        // Agregar empleados a departamentos
         dept1.addComponent(emp1);
         dept1.addComponent(emp3);
         dept2.addComponent(emp2);
 
-        // Crear un departamento general
         Department company = new Department("Company");
         company.addComponent(dept1);
         company.addComponent(dept2);
 
-        // Construir los detalles de la jerarquía
         StringBuilder details = new StringBuilder();
         buildDetails(company, details);
 
-        // Mostrar los detalles en un cuadro de diálogo
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Jerarquía de Componentes");
         alert.setHeaderText("Estructura de la Empresa");
@@ -191,27 +159,25 @@ public class ControladorFormulario {
         }
     }
 
-    private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
-        Alert alerta = new Alert(tipo);
-        alerta.setContentText(mensaje);
-        alerta.show();
-    }
-
     @FXML
     void mostrarCliente(ActionEvent event) {
         String idCliente = txtIdActualizar.getText();
-
         if (idCliente.isEmpty()) {
             mostrarAlerta("❌ Por favor, ingresa un ID.", Alert.AlertType.WARNING);
             return;
         }
 
         Cliente cliente = clienteDAO.obtener(idCliente);
-
         if (cliente != null) {
             mostrarAlerta("✅ Cliente encontrado: \nID: " + cliente.getIdCliente() + "\nNombre: " + cliente.getNombre(), Alert.AlertType.INFORMATION);
         } else {
             mostrarAlerta("❌ Cliente no encontrado.", Alert.AlertType.ERROR);
         }
+    }
+
+    private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setContentText(mensaje);
+        alerta.show();
     }
 }
