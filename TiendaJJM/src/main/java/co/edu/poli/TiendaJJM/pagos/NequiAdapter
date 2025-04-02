@@ -1,0 +1,14 @@
+package co.edu.poli.TiendaJJM.pagos;
+
+public class NequiAdapter implements MetodoPago {
+    private Nequi nequi;
+
+    public NequiAdapter(Nequi nequi) {
+        this.nequi = nequi;
+    }
+
+    @Override
+    public void procesarPago(double monto) {
+        nequi.realizarPago(monto);
+    }
+}

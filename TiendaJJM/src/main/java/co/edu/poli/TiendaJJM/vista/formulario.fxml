@@ -6,41 +6,45 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.TiendaJJM.controlador.ControladorFormulario">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.TiendaJJM.controlador.ControladorFormulario">
     
     <children>
         <!-- Título -->
-        <Text fontSmoothingType="LCD" layoutX="196.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIENDA JJM" textAlignment="CENTER">
+        <Text fontSmoothingType="LCD" layoutX="200.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIENDA JJM" textAlignment="CENTER">
             <font>
                 <Font name="Segoe UI Bold" size="36.0" />
             </font>
         </Text>
 
         <!-- Sección Cliente -->
-        <TextField fx:id="txt1" alignment="CENTER" layoutX="225.0" layoutY="124.0" promptText="ID Cliente" />
-        <TextField fx:id="txt2" alignment="CENTER" layoutX="225.0" layoutY="157.0" promptText="Nombre Cliente" />
-        <Button fx:id="Btt1" layoutX="250.0" layoutY="198.0" mnemonicParsing="false" onAction="#click" text="Guardar Cliente" />
+        <TextField fx:id="txt1" alignment="CENTER" layoutX="50.0" layoutY="100.0" promptText="ID Cliente" />
+        <TextField fx:id="txt2" alignment="CENTER" layoutX="250.0" layoutY="100.0" promptText="Nombre Cliente" />
+        <Button fx:id="Btt1" layoutX="500.0" layoutY="100.0" mnemonicParsing="false" onAction="#click" text="Guardar Cliente" />
 
         <!-- Sección para eliminar Cliente -->
-        <TextField fx:id="txtEliminar" alignment="CENTER" layoutX="49.0" layoutY="315.0" promptText="ID Cliente a eliminar" />
-        <Button fx:id="btnEliminar" layoutX="75.0" layoutY="427.0" onAction="#eliminarCliente" text="Eliminar Cliente" />
+        <TextField fx:id="txtEliminar" alignment="CENTER" layoutX="50.0" layoutY="150.0" promptText="ID Cliente a eliminar" />
+        <Button fx:id="btnEliminar" layoutX="500.0" layoutY="150.0" onAction="#eliminarCliente" text="Eliminar Cliente" />
 
         <!-- Sección para actualizar Cliente -->
-        <TextField fx:id="txtIdActualizar" alignment="CENTER" layoutX="245.0" layoutY="315.0" promptText="ID Cliente a actualizar" />
-        <TextField fx:id="txtNombreActualizar" alignment="CENTER" layoutX="245.0" layoutY="357.0" promptText="Nuevo Nombre" />
-        <Button fx:id="btnActualizar" layoutX="266.0" layoutY="427.0" onAction="#actualizarCliente" text="Actualizar Cliente" />
+        <TextField fx:id="txtIdActualizar" alignment="CENTER" layoutX="50.0" layoutY="200.0" promptText="ID Cliente a actualizar" />
+        <TextField fx:id="txtNombreActualizar" alignment="CENTER" layoutX="250.0" layoutY="200.0" promptText="Nuevo Nombre" />
+        <Button fx:id="btnActualizar" layoutX="500.0" layoutY="200.0" onAction="#actualizarCliente" text="Actualizar Cliente" />
 
         <!-- Botón Mostrar Cliente -->
-        <Button fx:id="btnMostrarCliente" layoutX="251.0" layoutY="237.0" mnemonicParsing="false" onAction="#mostrarCliente" text="Mostrar Cliente" />
+        <Button fx:id="btnMostrarCliente" layoutX="250.0" layoutY="250.0" mnemonicParsing="false" onAction="#mostrarCliente" text="Mostrar Cliente" />
 
         <!-- Sección Producto -->
-        <TextField fx:id="txtIdProducto" alignment="CENTER" layoutX="423.0" layoutY="315.0" promptText="ID Producto" />
-        <TextField fx:id="txtNombreProducto" alignment="CENTER" layoutX="423.0" layoutY="357.0" promptText="Nombre Producto" />
-        <Button fx:id="btnAgregarProducto" layoutX="442.0" layoutY="392.0" mnemonicParsing="false" onAction="#agregarProducto" text="Agregar Producto" />
-        <Button fx:id="btnEliminarProducto" layoutX="442.0" layoutY="427.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar Producto" />
+        <TextField fx:id="txtIdProducto" alignment="CENTER" layoutX="50.0" layoutY="300.0" promptText="ID Producto" />
+        <TextField fx:id="txtNombreProducto" alignment="CENTER" layoutX="250.0" layoutY="300.0" promptText="Nombre Producto" />
+        <Button fx:id="btnAgregarProducto" layoutX="500.0" layoutY="300.0" mnemonicParsing="false" onAction="#agregarProducto" text="Agregar Producto" />
+        <Button fx:id="btnEliminarProducto" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar Producto" />
 
         <!-- Botón Clonar Producto -->
-        <Button fx:id="btnClonar" layoutX="446.0" layoutY="460.0" mnemonicParsing="false" onAction="#clonarProducto" text="Clonar Producto" />
+        <Button fx:id="btnClonar" layoutX="500.0" layoutY="400.0" mnemonicParsing="false" onAction="#clonarProducto" text="Clonar Producto" />
+
+        <!-- Sección Métodos de Pago -->
+        <Button fx:id="btnPagarNequi" layoutX="100.0" layoutY="480.0" onAction="#pagarConNequi" text="Pagar con Nequi" />
+        <Button fx:id="btnPagarPayPal" layoutX="350.0" layoutY="480.0" onAction="#pagarConPayPal" text="Pagar con PayPal" />
         
     </children>
 </AnchorPane>

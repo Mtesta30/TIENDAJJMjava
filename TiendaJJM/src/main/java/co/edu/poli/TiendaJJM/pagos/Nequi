@@ -1,0 +1,7 @@
+package co.edu.poli.TiendaJJM.pagos;
+
+public class Nequi {
+    public void realizarPago(double monto) {
+        System.out.println("Pago realizado con Nequi: $" + monto);
+    }
+}

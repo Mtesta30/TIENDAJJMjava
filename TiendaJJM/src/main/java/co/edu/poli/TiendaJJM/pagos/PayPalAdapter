@@ -1,0 +1,14 @@
+package co.edu.poli.TiendaJJM.pagos;
+
+public class PayPalAdapter implements MetodoPago {
+    private PayPal paypal;
+
+    public PayPalAdapter(PayPal paypal) {
+        this.paypal = paypal;
+    }
+
+    @Override
+    public void procesarPago(double monto) {
+        paypal.enviarPago(monto);
+    }
+}
